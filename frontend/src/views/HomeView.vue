@@ -3,7 +3,10 @@
     class="mx-auto"
     style="min-width: 300px; max-width: 900px"
   >
-    <SearchInput class="ma-3"/>
+    <SearchInput
+      class="ma-3"
+      @search="search"
+    />
 
     <v-container>
       <SearchResultsRow
