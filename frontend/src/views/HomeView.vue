@@ -49,3 +49,9 @@ export default class HomeView extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.row + .row {
+  margin-top: -12px;
+}
+</style>
