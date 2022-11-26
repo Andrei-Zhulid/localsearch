@@ -1,10 +1,16 @@
 <template>
-  <div>Home page</div>
+  <div
+    class="mx-auto"
+    style="min-width: 300px; max-width: 900px"
+  >
+    <SearchInput class="ma-3"/>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import SearchInput from '@/components/SearchInput.vue';
 
-@Component
+@Component({ components: { SearchInput } })
 export default class HomeView extends Vue {}
 </script>
