@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from 'axios';
-import IPlace from '../src/interfaces/IPlace';
+import IPlace from '../../common/interfaces/IPlace';
 import IApiResponse from '../src/interfaces/IApiResponce';
 
 class SearchService {
@@ -16,7 +16,7 @@ class SearchService {
         .map((place: string) => http.get(place).then(response => response.data));
 
       Promise.all(promises).then(responses => {
-        this.cache = responses.map(response => <IPlace>{
+        this.cache = responses.map(response => <IPlace> {
           id: response.local_entry_id,
           name: response.displayed_what,
           address: response.displayed_where,
