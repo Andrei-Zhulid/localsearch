@@ -6,7 +6,7 @@
     <SearchInput class="ma-3"/>
 
     <v-container>
-      <SearchResultsLoaderRow/>
+      <SearchResultsLoaderRow v-show="loading"/>
     </v-container>
   </div>
 </template>
@@ -17,5 +17,7 @@ import SearchInput from '@/components/SearchInput.vue';
 import SearchResultsLoaderRow from '@/components/SearchResultsLoaderRow.vue';
 
 @Component({ components: { SearchResultsLoaderRow, SearchInput } })
-export default class HomeView extends Vue {}
+export default class HomeView extends Vue {
+  private loading = false;
+}
 </script>
