@@ -30,6 +30,7 @@ import SearchResultsRow from '@/components/SearchResultsRow.vue';
 
 @Component({ components: { SearchResultsRow, SearchResultsRowNoData, SearchResultsRowLoader, SearchInput } })
 export default class HomeView extends Vue {
+  // noinspection JSMismatchedCollectionQueryUpdate
   private places: IPlace[] = [];
   private loading = false;
 
@@ -51,6 +52,7 @@ export default class HomeView extends Vue {
 </script>
 
 <style scoped>
+/*noinspection CssUnusedSymbol*/
 .row + .row {
   margin-top: -12px;
 }
