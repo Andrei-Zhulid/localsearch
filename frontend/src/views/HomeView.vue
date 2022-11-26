@@ -6,14 +6,7 @@
     <SearchInput class="ma-3"/>
 
     <v-container>
-      <v-row>
-        <SearchResultsColumn>
-          <v-skeleton-loader type="article"/>
-        </SearchResultsColumn>
-        <SearchResultsColumn>
-          <v-skeleton-loader type="article"/>
-        </SearchResultsColumn>
-      </v-row>
+      <SearchResultsLoaderRow/>
     </v-container>
   </div>
 </template>
@@ -21,8 +14,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import SearchInput from '@/components/SearchInput.vue';
-import SearchResultsColumn from '@/components/SearchResultsColumn.vue';
+import SearchResultsLoaderRow from '@/components/SearchResultsLoaderRow.vue';
 
-@Component({ components: { SearchResultsColumn, SearchInput } })
+@Component({ components: { SearchResultsLoaderRow, SearchInput } })
 export default class HomeView extends Vue {}
 </script>
