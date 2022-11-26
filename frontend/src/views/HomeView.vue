@@ -19,7 +19,7 @@
           Your search did not match any places.
         </SearchResultsColumn>
       </v-row>
-      <SearchResultsLoaderRow v-show="loading"/>
+      <SearchResultsRowLoader v-show="loading"/>
     </v-container>
   </div>
 </template>
@@ -27,13 +27,13 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import SearchInput from '@/components/SearchInput.vue';
-import SearchResultsLoaderRow from '@/components/SearchResultsLoaderRow.vue';
+import SearchResultsRowLoader from '@/components/SearchResultsRowLoader.vue';
 import IPlace from '../../../common/interfaces/IPlace';
 import SearchService from '@/servises/SearchService';
 import SearchResultsColumn from '@/components/SearchResultsColumn.vue';
 import PlaceCard from '@/components/PlaceCard.vue';
 
-@Component({ components: { PlaceCard, SearchResultsColumn, SearchResultsLoaderRow, SearchInput } })
+@Component({ components: { PlaceCard, SearchResultsColumn, SearchResultsRowLoader, SearchInput } })
 export default class HomeView extends Vue {
   private places: IPlace[] = [];
   private loading = false;

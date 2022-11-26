@@ -14,5 +14,5 @@ import { Component, Vue } from 'vue-property-decorator';
 import SearchResultsColumn from '@/components/SearchResultsColumn.vue';
 
 @Component({ components: { SearchResultsColumn } })
-export default class SearchResultsLoaderRow extends Vue {}
+export default class SearchResultsRowLoader extends Vue {}
 </script>
