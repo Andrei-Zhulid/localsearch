@@ -4,6 +4,10 @@
     style="min-width: 300px; max-width: 900px"
   >
     <SearchInput class="ma-3"/>
+
+    <v-container>
+      <!-- Results -->
+    </v-container>
   </div>
 </template>
 
