@@ -14,11 +14,7 @@
           <PlaceCard :place="place"/>
         </SearchResultsColumn>
       </v-row>
-      <v-row v-show="!loading && places?.length === 0">
-        <SearchResultsColumn class="mx-4">
-          Your search did not match any places.
-        </SearchResultsColumn>
-      </v-row>
+      <SearchResultsRowNoData v-show="!loading && places?.length === 0"/>
       <SearchResultsRowLoader v-show="loading"/>
     </v-container>
   </div>
@@ -32,8 +28,9 @@ import IPlace from '../../../common/interfaces/IPlace';
 import SearchService from '@/servises/SearchService';
 import SearchResultsColumn from '@/components/SearchResultsColumn.vue';
 import PlaceCard from '@/components/PlaceCard.vue';
+import SearchResultsRowNoData from '@/components/SearchResultsRowNoData.vue';
 
-@Component({ components: { PlaceCard, SearchResultsColumn, SearchResultsRowLoader, SearchInput } })
+@Component({ components: { SearchResultsRowNoData, PlaceCard, SearchResultsColumn, SearchResultsRowLoader, SearchInput } })
 export default class HomeView extends Vue {
   private places: IPlace[] = [];
   private loading = false;
