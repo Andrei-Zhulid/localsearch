@@ -56,7 +56,10 @@
         </v-row>
       </v-container>
     </div>
-    <span v-else>Loading...</span>
+    <v-skeleton-loader
+      v-else
+      type="article"
+    />
   </div>
 </template>
 
