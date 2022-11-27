@@ -1,14 +1,11 @@
 <template>
-  <div
-    class="mx-auto"
-    style="min-width: 300px; max-width: 900px"
-  >
+  <div>
     <SearchInput
-      class="ma-3"
+      class="mb-6"
       @search="search"
     />
 
-    <v-container>
+    <v-container class="pa-0">
       <SearchResultsRow
         v-show="!loading && places?.length > 0"
         :items="places"
