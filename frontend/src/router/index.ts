@@ -10,6 +10,12 @@ const routes: Array<RouteConfig> = [
     name: 'home',
     component: HomeView
   },
+  {
+    path: '/place/:id',
+    name: 'Place',
+    component: () => import(/* webpackChunkName: "place" */ '@/views/PlaceView.vue'),
+    props: true,
+  },
 ]
 
 const router = new VueRouter({
