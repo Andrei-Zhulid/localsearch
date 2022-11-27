@@ -24,7 +24,7 @@ app.get('/search', (request: Request, response: Response) => {
       response.send(places);
     }
   } catch (error) {
-    console.log('GET / error', error);
+    console.log('GET /search error', error);
     response.status(500).end();
   }
 })
