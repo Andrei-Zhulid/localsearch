@@ -8,7 +8,7 @@ class SearchService {
     this.http = axios.create({ baseURL: process.env.VUE_APP_SEARCH_API });
   }
 
-  public search(query?: string): Promise<IPlace[]> {
+  public searchByQuery(query?: string): Promise<IPlace[]> {
     return this.http
       .get(`?query=${query || ''}`).then(response => response.data)
       .catch((error) => console.log((error as AxiosError)?.code === AxiosError.ERR_NETWORK

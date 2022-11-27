@@ -37,7 +37,7 @@ export default class HomeView extends Vue {
   private async search(query?: string) {
     try {
       this.loading = true;
-      this.places = await SearchService.search(query);
+      this.places = await SearchService.searchByQuery(query);
     } catch (error) {
       console.log(error);
     } finally {
