@@ -5,7 +5,7 @@
 
       <v-container class="pa-0">
         <v-row>
-          <v-col>
+          <VColumn>
             <InfoField
               v-if="place.address"
               title="Address"
@@ -32,7 +32,27 @@
                 {{ phone }}
               </a>
             </InfoField>
-          </v-col>
+          </VColumn>
+
+          <VColumn class="mt-n6 mt-sm-0">
+            <InfoField title="Opening Hours">
+              <v-row
+                v-for="[intervals, days] in openingHours"
+                :key="intervals"
+                dense
+              >
+                <v-col class="text-capitalize">{{ days }}</v-col>
+                <v-col class="text-right">
+                  <div
+                    v-for="interval in intervals.split(',')"
+                    :key="interval"
+                  >
+                    {{ interval }}
+                  </div>
+                </v-col>
+              </v-row>
+            </InfoField>
+          </VColumn>
         </v-row>
       </v-container>
     </div>
@@ -47,8 +67,10 @@ import SearchService from '@/servises/SearchService';
 import { AxiosError } from 'axios';
 import { RouteName } from '@/router';
 import InfoField from '@/components/InfoField.vue';
+import VColumn from '@/components/VColumn.vue';
+import OpeningHoursHelper from '@/helpers/OpeningHoursHelper';
 
-@Component({ components: { InfoField } })
+@Component({ components: { VColumn, InfoField } })
 export default class PlaceView extends Vue {
   @Prop({ type: String, required: true }) readonly id!: string;
 
@@ -56,6 +78,10 @@ export default class PlaceView extends Vue {
 
   private get phoneTitle() {
     return (this.place?.phones?.length ?? 0) > 1 ? 'Phones' : 'Phone'
+  }
+
+  private get openingHours() {
+    return OpeningHoursHelper.groupByTime(this.place?.openingHours!);
   }
 
   // noinspection JSUnusedLocalSymbols
