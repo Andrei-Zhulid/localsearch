@@ -12,7 +12,7 @@ class SearchService {
     return this.http
       .get(`?query=${query || ''}`).then(response => response.data)
       .catch((error) => console.log((error as AxiosError)?.code === AxiosError.ERR_NETWORK
-        ? 'Search Service is not responding. Make sure the service is running and you have stable internet connection.  '
+        ? 'Search Service is not responding. Make sure the service is running.'
         : error));
   }
 }
