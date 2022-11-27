@@ -1,12 +1,30 @@
 import axios, { AxiosInstance } from 'axios';
 import IPlace from '../../common/interfaces/IPlace';
 import IApiResponse from '../src/interfaces/IApiResponce';
+import IPlaceDetailed from '../../common/interfaces/IPlaceDetailed';
+import ContactType from '../../common/enums/ContactType';
 
 class SearchService {
-  private cache: IPlace[] | null = null;
+  private cache: IPlaceDetailed[] | null = null;
 
   constructor() {
     this.cachePlaces(); // We can preload data because it isn't changed (constant)
+  }
+
+  private convertToIPlaceDetailed(apiResponse: IApiResponse): IPlaceDetailed {
+    return <IPlaceDetailed>{
+      id: apiResponse.local_entry_id,
+      name: apiResponse.displayed_what,
+      address: apiResponse.displayed_where,
+      phone: apiResponse.addresses?.[0]?.contacts?.filter(contact => contact.contact_type === ContactType.Phone)
+        .map(contact => contact.call_link),
+      website: apiResponse.addresses?.[0]?.contacts?.find(contact => contact.contact_type === ContactType.Url)?.url,
+      openingHours: apiResponse.opening_hours.days
+    }
+  }
+
+  private convertToIPlace({ address, id, name }: IPlaceDetailed): IPlace {
+    return <IPlace>{ id, name, address };
   }
 
   private cachePlaces(): void {
@@ -16,11 +34,7 @@ class SearchService {
         .map((place: string) => http.get(place).then(response => response.data));
 
       Promise.all(promises).then(responses => {
-        this.cache = responses.map(response => <IPlace> {
-          id: response.local_entry_id,
-          name: response.displayed_what,
-          address: response.displayed_where,
-        });
+        this.cache = responses.map(response => this.convertToIPlaceDetailed(response));
 
         console.log('Cache is populated and ready to use');
       });
@@ -36,7 +50,7 @@ class SearchService {
     }
 
     // if no query return all places
-    if (!query) return this.cache;
+    if (!query) return this.cache.map(placeDetails => this.convertToIPlace(placeDetails));
 
     // if query doesn't contain any word character (equivalent to [a-zA-Z0-9_]) return empty result
     if (!/\w/.test(query)) return [];
@@ -44,7 +58,9 @@ class SearchService {
     // search query starting from words boundaries
     const regExp = new RegExp(`\\b${query}`, 'i');
 
-    return this.cache.filter(place => regExp.test(place.name) || regExp.test(place.address));
+    return this.cache
+      .filter(place => regExp.test(place.name) || regExp.test(place.address))
+      .map(placeDetails => this.convertToIPlace(placeDetails));
   }
 }
 
