@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance } from 'axios';
 import IPlace from '../../../common/interfaces/IPlace';
+import IPlaceDetailed from '../../../common/interfaces/IPlaceDetailed';
 
 class SearchService {
   private http: AxiosInstance;
@@ -8,13 +9,18 @@ class SearchService {
     this.http = axios.create({ baseURL: process.env.VUE_APP_SEARCH_API });
   }
 
-  public searchByQuery(query?: string): Promise<IPlace[]> {
-    return this.http
-      .get(`?query=${query || ''}`).then(response => response.data)
-      .catch((error) => console.log((error as AxiosError)?.code === AxiosError.ERR_NETWORK
+  private processRequest = <T>(url: string): Promise<T> =>
+    this.http
+      .get(url).then(response => response.data)
+      .catch((error: AxiosError) => console.log(error?.code === AxiosError.ERR_NETWORK
         ? 'Search Service is not responding. Make sure the service is running.'
         : error));
-  }
+
+  public searchByQuery = async (query?: string): Promise<IPlace[]> =>
+    await this.processRequest<IPlace[]>(`?query=${query || ''}`);
+
+  public searchById = async (id: string): Promise<IPlaceDetailed> =>
+    await this.processRequest<IPlaceDetailed>(`?id=${id}`);
 }
 
 export default new SearchService();
