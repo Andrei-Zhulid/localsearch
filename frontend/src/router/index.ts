@@ -16,6 +16,11 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "place" */ '@/views/PlaceView.vue'),
     props: true,
   },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: () => import(/* webpackChunkName: "not-found" */ '@/views/NotFound.vue'),
+  },
 ]
 
 const router = new VueRouter({
