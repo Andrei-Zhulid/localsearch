@@ -12,9 +12,14 @@ class SearchService {
   private processRequest = <T>(url: string): Promise<T> =>
     this.http
       .get(url).then(response => response.data)
-      .catch((error: AxiosError) => console.log(error?.code === AxiosError.ERR_NETWORK
-        ? 'Search Service is not responding. Make sure the service is running.'
-        : error));
+      .catch((error: AxiosError) => {
+        if (error?.code === AxiosError.ERR_BAD_REQUEST)
+          throw error;
+        else
+          console.log(error?.code === AxiosError.ERR_NETWORK
+            ? 'Search Service is not responding. Make sure the service is running.'
+            : error);
+      });
 
   public searchByQuery = async (query?: string): Promise<IPlace[]> =>
     await this.processRequest<IPlace[]>(`?query=${query || ''}`);

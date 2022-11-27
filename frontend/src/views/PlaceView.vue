@@ -9,6 +9,8 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import IPlaceDetailed from '../../../common/interfaces/IPlaceDetailed';
 import SearchService from '@/servises/SearchService';
+import { AxiosError } from 'axios';
+import { RouteName } from '@/router';
 
 @Component
 export default class PlaceView extends Vue {
@@ -21,7 +23,10 @@ export default class PlaceView extends Vue {
     try {
       this.place = await SearchService.searchById(this.id);
     } catch (error) {
-      console.log(error);
+      if ((error as AxiosError)?.code === AxiosError.ERR_BAD_REQUEST)
+        await this.$router.push({ name: RouteName.NotFound });
+      else
+        console.log(error);
     }
   }
 }
