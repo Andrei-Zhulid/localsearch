@@ -3,7 +3,7 @@ import IOpeningHours from '../IOpeningHours';
 
 interface IPlaceDetailed extends IPlace {
   website: string;
-  phone: string[];
+  phones: string[];
   openingHours: IOpeningHours;
 }
 

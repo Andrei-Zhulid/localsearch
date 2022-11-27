@@ -16,7 +16,7 @@ class SearchService {
       id: apiResponse.local_entry_id,
       name: apiResponse.displayed_what,
       address: apiResponse.displayed_where,
-      phone: apiResponse.addresses?.[0]?.contacts?.filter(contact => contact.contact_type === ContactType.Phone)
+      phones: apiResponse.addresses?.[0]?.contacts?.filter(contact => contact.contact_type === ContactType.Phone)
         .map(contact => contact.call_link),
       website: apiResponse.addresses?.[0]?.contacts?.find(contact => contact.contact_type === ContactType.Url)?.url,
       openingHours: apiResponse.opening_hours.days
