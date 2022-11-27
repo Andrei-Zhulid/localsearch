@@ -1,18 +1,18 @@
 <template>
   <v-row>
-    <SearchResultsColumn>
+    <VColumn>
       <v-skeleton-loader type="article"/>
-    </SearchResultsColumn>
-    <SearchResultsColumn>
+    </VColumn>
+    <VColumn>
       <v-skeleton-loader type="article"/>
-    </SearchResultsColumn>
+    </VColumn>
   </v-row>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import SearchResultsColumn from '@/components/SearchResultsColumn.vue';
+import VColumn from '@/components/VColumn.vue';
 
-@Component({ components: { SearchResultsColumn } })
+@Component({ components: { VColumn } })
 export default class SearchResultsRowLoader extends Vue {}
 </script>

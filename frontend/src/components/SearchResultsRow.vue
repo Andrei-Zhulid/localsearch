@@ -1,21 +1,21 @@
 <template>
   <v-row>
-    <SearchResultsColumn
+    <VColumn
       v-for="item in items"
       :key="item.id"
     >
       <PlaceCard :place="item"/>
-    </SearchResultsColumn>
+    </VColumn>
   </v-row>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import SearchResultsColumn from '@/components/SearchResultsColumn.vue';
+import VColumn from '@/components/VColumn.vue';
 import PlaceCard from '@/components/PlaceCard.vue';
 import IPlace from '../../../common/interfaces/IPlace';
 
-@Component({ components: { PlaceCard, SearchResultsColumn } })
+@Component({ components: { PlaceCard, VColumn } })
 export default class SearchResultsRow extends Vue {
   @Prop({ type: Array, required: true }) items!: IPlace[];
 }

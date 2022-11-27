@@ -11,5 +11,5 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class SearchResultsColumn extends Vue {}
+export default class VColumn extends Vue {}
 </script>

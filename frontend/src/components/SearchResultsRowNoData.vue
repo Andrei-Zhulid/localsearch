@@ -1,15 +1,15 @@
 <template>
   <v-row>
-    <SearchResultsColumn class="mx-4">
+    <VColumn class="mx-4">
       Your search did not match any places.
-    </SearchResultsColumn>
+    </VColumn>
   </v-row>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import SearchResultsColumn from '@/components/SearchResultsColumn.vue';
+import VColumn from '@/components/VColumn.vue';
 
-@Component({ components: { SearchResultsColumn } })
+@Component({ components: { VColumn } })
 export default class SearchResultsRowNoData extends Vue {}
 </script>
