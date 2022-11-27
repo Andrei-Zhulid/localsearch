@@ -43,14 +43,18 @@ class SearchService {
     }
   }
 
-  public search(query: string): IPlace[] {
+  private cacheHealthCheck(): void {
     if (this.cache == null) {
       // In the real world example we need to have retries policy
       throw new Error('SearchService.cache is broken');
     }
+  }
+
+  public search(query: string): IPlace[] {
+    this.cacheHealthCheck();
 
     // if no query return all places
-    if (!query) return this.cache.map(placeDetails => this.convertToIPlace(placeDetails));
+    if (!query) return this.cache!.map(placeDetails => this.convertToIPlace(placeDetails));
 
     // if query doesn't contain any word character (equivalent to [a-zA-Z0-9_]) return empty result
     if (!/\w/.test(query)) return [];
@@ -58,9 +62,15 @@ class SearchService {
     // search query starting from words boundaries
     const regExp = new RegExp(`\\b${query}`, 'i');
 
-    return this.cache
+    return this.cache!
       .filter(place => regExp.test(place.name) || regExp.test(place.address))
       .map(placeDetails => this.convertToIPlace(placeDetails));
+  }
+
+  public getPlaceDetails(id: string): IPlaceDetailed | null {
+    this.cacheHealthCheck();
+
+    return this.cache!.find(place => place.id === id) ?? null;
   }
 }
 

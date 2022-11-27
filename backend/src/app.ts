@@ -13,8 +13,16 @@ app.use(cors(options));
 
 app.get('/search', (request: Request, response: Response) => {
   try {
-    const places = SearchService.search(<string> request.query.query);
-    response.send(places);
+    if (request.query.id) {
+      const place = SearchService.getPlaceDetails(<string>request.query.id);
+      if (!place)
+        response.status(404).end();
+      else
+        response.send(place);
+    } else {
+      const places = SearchService.search(<string>request.query.query);
+      response.send(places);
+    }
   } catch (error) {
     console.log('GET / error', error);
     response.status(500).end();
