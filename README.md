@@ -61,5 +61,6 @@ In the real world the solution should include the following items which are omit
 
 * error middleware (in the current solution all errors are printed to the console);
 * request/response schemas
+* tests
 * path configuration (in the current solution all paths are relative)
 * etc.
