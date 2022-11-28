@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-import SearchService from '../services/SearchService';
+import SearchService from './services/SearchService';
 
 const app: Application = express();
 const options: cors.CorsOptions = { origin: ['http://localhost:8080'] };

@@ -1,8 +1,8 @@
 import axios, { AxiosInstance } from 'axios';
-import IPlace from '../../common/interfaces/IPlace';
-import IApiResponse from '../src/interfaces/IApiResponce';
-import IPlaceDetailed from '../../common/interfaces/IPlaceDetailed';
-import ContactType from '../../common/enums/ContactType';
+import IPlace from '../../../common/interfaces/IPlace';
+import IApiResponse from '../interfaces/IApiResponce';
+import IPlaceDetailed from '../../../common/interfaces/IPlaceDetailed';
+import ContactType from '../../../common/enums/ContactType';
 
 class SearchService {
   private cache: IPlaceDetailed[] | null = null;
