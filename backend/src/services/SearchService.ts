@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import IPlace from '../../../common/interfaces/IPlace';
-import IApiResponse from '../interfaces/IApiResponce';
+import IApiResponse from '../interfaces/IApiResponse';
 import IPlaceDetailed from '../../../common/interfaces/IPlaceDetailed';
 import ContactType from '../../../common/enums/ContactType';
 
